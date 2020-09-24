@@ -1,2 +1,44 @@
 # pwrsys-matlab
-Open Matlab and Simulink library for design an dsimulation of power systems with high penetration of converter-interfaced equipment
+This is an open Matlab and Simulink library for design and simulation of power systems with high penetration of converter-interfaced equipment.
+
+# Getting Started
+
+## Matlab requirememnts
+pwrsys-matlab Simulink Library is saved in MATLAB version R2018a, so any newer MATLAB release should be compatible with this library.
+
+|**Required Software**|**Version**|
+|---|---|
+|MATLAB|Version 9.4 (R2018a)|
+|Simulink|Version 9.1 (R2018a)|
+|Simscape|Version 4.4 (R2018a)|
+|Simscape Power Systems|Version 6.9(R2018a)|
+
+Ensure that the correct version of MATLAB and the required toolboxes are installed by typing `ver` in the MATLAB Command Window.
+
+## Installing the library
+
+Follow these steps:
+1. Clone the repository from GitHub: (https://github.com/efantnu/pwrsys-matlab)
+2. Open your MATLAB startup file typing 'open startup.m' in MATLAB Command Window.
+3. Add the following lines to the end of this file:
+    pwrsysPath = '<pwrsys-matlab path>';
+    addpath(genpath(pwrsysPath));
+4. Restart your MATLAB
+5. Open the Simulink Library Browser by typing `slLibraryBrowser` in the MATLAB Command Window
+6. Once the Simulink Library Browser opens, [refresh the Simulink Library](http://www.mathworks.com/help/simulink/gui/use-the-library-browser.html).
+
+The NTNU Power Systems library should now be visible. :-)
+
+
+
+
+,
+
+
+
+
+
+
+
+
+
