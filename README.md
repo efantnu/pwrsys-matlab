@@ -25,8 +25,10 @@ Follow these steps:
 1. Clone the repository from GitHub: (https://github.com/efantnu/pwrsys-matlab)
 2. Open your MATLAB startup file typing 'open startup.m' in MATLAB Command Window.
 3. Add the following lines to the end of this file:
+```matlab
     pwrsysPath = '<pwrsys-matlab path>';
     addpath(genpath(pwrsysPath));
+```
 4. Restart your MATLAB
 5. Open the Simulink Library Browser by typing `slLibraryBrowser` in the MATLAB Command Window
 6. Once the Simulink Library Browser opens, [refresh the Simulink Library](http://www.mathworks.com/help/simulink/gui/use-the-library-browser.html).
