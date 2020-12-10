@@ -1,7 +1,7 @@
 # NTNU Power Systems Library (pwrsys-matlab)
 This is an open MATLAB and Simulink library for design and simulation of power systems with converter-interfaced equipment. It is developed by volunteer PhD fellows in the [Department of Electric Power Engineering](https://www.ntnu.edu/iel/) at NTNU.
 
-This project started because some of us missed basic blocks and functionalitites in the Simscape Power Systems Toolbox to perform studies of power systems with high penetration of converter-interfaced equipment. 
+This project started because some of us missed basic blocks and functionalitites in the Simscape Electrical Specialized Power Systems Toolbox to perform studies of power systems with high penetration of converter-interfaced equipment. 
 
 This is library is far from complete and is not thoroughly tested yet. Use it at your own risk. :-)
 
