@@ -3,11 +3,11 @@ This is an open MATLAB and Simulink library for design and simulation of power s
 
 This project started because some of us missed basic blocks and functionalitites in the Simscape Electrical Specialized Power Systems Toolbox to perform studies of power systems with high penetration of converter-interfaced equipment. 
 
-This is library is far from complete and is not thoroughly tested yet. Use it at your own risk. :-)
+This library is far from complete and is not yet thoroughly documented, tested nor optimized. Use it at your own risk. :-)
 
 # Getting Started
 
-## Matlab requirememnts
+## Matlab requirements
 pwrsys-matlab Simulink Library is saved in MATLAB version R2018a, so any newer MATLAB release should be compatible with this library.
 
 |**Required Software**|**Version**|
