@@ -31,7 +31,7 @@ Follow these steps:
 ```
 4. Restart your MATLAB
 5. Open the Simulink Library Browser by typing `slLibraryBrowser` in the MATLAB Command Window
-6. Once the Simulink Library Browser opens, [refresh the Simulink Library](http://www.mathworks.com/help/simulink/gui/use-the-library-browser.html).
+6. Once the Simulink Library Browser opens, [refresh the Simulink Library](https://se.mathworks.com/help/simulink/slref/librarybrowser.librarybrowser2.refresh.html).
 
 The NTNU Power Systems library should now be visible. :-)
 
