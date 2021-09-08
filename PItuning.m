@@ -40,7 +40,11 @@ Icont = {};
 Ucont = {};
 
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
-disp('% PItuning');
+if dual == 1
+    disp('% PI tuning - Dual Controller');
+else
+    disp('% PI tuning - Single Controller');
+end
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
 
 
@@ -79,7 +83,7 @@ a = 2*param.dampDC + 1;
 
 % Equations (17)
 Ucont.Ti = a^2 * TsumU;
-Ucont.kp = (1/(Wb*param.Cdc/Cdcb))/(a*TsumU);
+Ucont.kp = 1/(a*(param.Cdc/Cdcb)*TsumU);
 disp('DC voltage controller PI transfer function = kpdc (1 + 1/(s Tidc))');
 disp(['    Sum of small time constants TsumU = ',num2str(TsumU),' s']);
 disp(['    Ti = ',num2str(Ucont.Ti),' s']);

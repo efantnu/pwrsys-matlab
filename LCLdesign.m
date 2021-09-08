@@ -1,6 +1,6 @@
 %% LCLdesign.m
 % Autors: Erick Fernando Alves, Daniel dos Santos Mota
-% Date: 2021-06-07
+% Date: 2021-09-07
 %
 % This function designs the AC-side LCL filter and DC-side RC filter
 % of a grid-connected thre-phase voltage source converter (VSC). Based on 
@@ -27,9 +27,15 @@ function [designOk, output] = LCLdesign(param)
 %   .L1         : [H] LCL converter side inductance
 %   .l1         : [pu] LCL converter side inductance
 %   .R1         : [Ohm] LCL converter side resistance
+%   .r1         : [pu] LCL converter side resistance
 %   .Cf         : [F] shunt capacitance
+%   .cf         : [pu] shunt capacitance
 %   .Rf         : [Ohm] damping resistor
+%   .rf         : [pu] damping resistor
 %   .L2         : [H] trafo short circuit inductance seen from LV side
+%   .l2         : [pu] trafo short circuit inductance
+%   .R2         : [Ohm] trafo short circuit resistance seen from LV side
+%   .r2         : [pu] trafo short circuit resistance
 %   .fres       : [Hz] filter resonance frequency
 %
 %% DesignOk
@@ -37,7 +43,7 @@ function [designOk, output] = LCLdesign(param)
 %   -1          : Resonance frequency of filter below 10*Fn
 %   -2          : Resonance frequency of filter above 0.5*fsw
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
-disp('% LCLdesign');
+disp('% LCL design');
 disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
 
 %% Base values
@@ -70,14 +76,20 @@ disp(['    r1 = ',num2str(param.LCL.r1),' pu']);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Equation (2)
 % Shunt capacitance
-output.Cf = 0.05 * Cbase;
+output.cf = 0.05;
+output.Cf = output.cf * Cbase;
 
 % Transformer short circuit inductance seen from the LV side
+output.l2 = param.LCL.l2;
 output.L2 = param.LCL.l2 * Lbase;
 disp('Line side reactance (transformer) seen from LV towards HV');
 disp(['    L2 = ',num2str(output.L2),' H']);
-disp(['    l2 = ',num2str(param.LCL.l2),' pu']);
-disp(['    r2 = ',num2str(param.LCL.r2),' pu']);
+disp(['    l2 = ',num2str(output.l2),' pu']);
+
+output.r2 = param.LCL.r2;
+output.R2 = output.r2 * Zbase;
+disp(['    R2 = ',num2str(output.R2),' Ohm']);
+disp(['    r2 = ',num2str(output.r2),' pu']);
 
 
 %% Brantsaeter 2015
@@ -107,6 +119,7 @@ end
 % Equation (6)
 % Damping resistor
 output.Rf = 1 / ( 3 * 2 * pi * output.fres * output.Cf);
+output.rf = output.Rf / Zbase;
 
 disp('Shunt branch of the filter');
 disp(['    Cf = ',num2str(output.Cf),' F']);
