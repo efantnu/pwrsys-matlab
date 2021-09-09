@@ -17,7 +17,7 @@ function [Icont, Ucont] = PItuning(param, dual)
 %   .Udc        : [Vdc] rated dc voltage
 %   .Cdc        : [F] dc link capacitor
 %   .dampDC     : [-] damping of dc link voltage regulator
-%   .fsw        : [Hz] PWM switching frequency
+%   .Fsw        : [Hz] PWM switching frequency
 %   .Ts_control : [s] sampling time of control loop
 %   .L1         : [H] LCL converter side inductance
 %   .l1         : [pu] LCL converter side inductance
@@ -73,21 +73,47 @@ Icont.kp = 0.5* param.LCL.r1 * (Icont.Ti - halfTs)/(TsumI + halfTs);
 disp(['    kp = ',num2str(Icont.kp),' pu/pu']);
 disp('    Current feedback from LV side of trafo!');
 
-Idc = param.Sn / param.Udc;              
-Zdc = param.Udc / Idc;
-Wb = 2*pi*param.Fn;
-Cdcb = 1/(Wb*Zdc);
+%% Temporary comments by Mota 2021-09-09
+% There was something odd for me in Eq.(17), so I redid this part
+% I decided to use Eq.(20) instead of (17)
+% Furthermore, Suul does not explain how to calculat Tc in (20), so I
+% calculated it myself.
+
+%Idc = param.Sn / param.Udc;              
+%Zdc = param.Udc / Idc;
+%Wb = 2*pi*param.Fn;
+%Cdcb = 1/(Wb*Zdc);
+
+% Equation (18)
+%a = 2*param.dampDC + 1;
+
+% Equations (17)
+%Ucont.Ti = a^2 * TsumU;
+%Ucont.kp = 1/(a*(param.Cdc/Cdcb)*TsumU);
+%disp('DC voltage controller PI transfer function = kpdc (1 + 1/(s Tidc))');
+%disp(['    Sum of small time constants TsumU = ',num2str(TsumU),' s']);
+%disp(['    Ti = ',num2str(Ucont.Ti),' s']);
+%disp(['    kp = ',num2str(Ucont.kp),' pu/pu']);
+
+% Calculation of Tc in (18)
+% Vdc[V] = 1/(Cdc[F]) * integral(Idc[A] dt)
+% Vdc[V] = 1/(s Cdc[F]) Idc[A] : s is the Laplace variable
+% vdc[pu] * Udc[V] = 1/(s Cdc[F]) * idc[pu] Idc[A] : Udc Idc are the bases
+% vdc[pu] = 1/(s Tc) * idc[pu] : where Tc = Cdc[F] * Udc[V] / Idc[A] 
+Idc = param.Sn / param.Udc;
+Tc = param.Cdc *  param.Udc / Idc;
 
 % Equation (18)
 a = 2*param.dampDC + 1;
-
-% Equations (17)
-Ucont.Ti = a^2 * TsumU;
-Ucont.kp = 1/(a*(param.Cdc/Cdcb)*TsumU);
+% Equations (20)
+Ucont.Ti = a^2 * (TsumU + halfTs);
+Ucont.kp = Tc / (a*(TsumU + halfTs));
 disp('DC voltage controller PI transfer function = kpdc (1 + 1/(s Tidc))');
 disp(['    Sum of small time constants TsumU = ',num2str(TsumU),' s']);
 disp(['    Ti = ',num2str(Ucont.Ti),' s']);
 disp(['    kp = ',num2str(Ucont.kp),' pu/pu']);
+
+
 
 
     

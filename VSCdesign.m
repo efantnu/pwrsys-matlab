@@ -41,7 +41,7 @@
 %   -2          : Resonance frequency of filter above 0.5*fsw
 
 %%
-function [designOk, filter, controller] = VSCdesign_01(param)
+function [designOk, filter, controller] = VSCdesign(param)
 filter = {};
 controller = {};
 

@@ -3,9 +3,7 @@
 % Date: 2021-09-07
 %
 % This function designs the AC-side LCL filter and DC-side RC filter
-% of a grid-connected thre-phase voltage source converter (VSC). Based on 
-% this data, it also defines optimal controller parameters for a current 
-% controller on the dq0 reference frame.
+% of a grid-connected thre-phase voltage source converter (VSC).
 %
 
 %%
