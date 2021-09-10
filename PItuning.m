@@ -95,7 +95,7 @@ disp('    Current feedback from LV side of trafo!');
 %disp(['    Ti = ',num2str(Ucont.Ti),' s']);
 %disp(['    kp = ',num2str(Ucont.kp),' pu/pu']);
 
-% Calculation of Tc in (18)
+% Calculation of Tc in (20)
 % Vdc[V] = 1/(Cdc[F]) * integral(Idc[A] dt)
 % Vdc[V] = 1/(s Cdc[F]) Idc[A] : s is the Laplace variable
 % vdc[pu] * Udc[V] = 1/(s Cdc[F]) * idc[pu] Idc[A] : Udc Idc are the bases
