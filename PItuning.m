@@ -1,6 +1,6 @@
 %% PItuning.m
 % Autors: Erick Fernando Alves, Daniel dos Santos Mota
-% Date: 2021-09-07
+% Date: 2021-09-13
 %
 % This function tunes the PI controllers for current and DC-link voltage
 % regulation on the dq0 reference frame of a grid-connected three-phase
@@ -66,34 +66,12 @@ end
 % Current controller parameters
 halfTs = 0.5*param.Ts_control;
 Icont.Ti = (param.LCL.L1/param.LCL.R1) + halfTs;
+Icont.kp = 0.5* param.LCL.r1 * (Icont.Ti - halfTs)/(TsumI + halfTs);
 disp('Current controller PI transfer function = kp (1 + 1/(sTi))');
 disp(['    Sum of small time constants TsumI = ',num2str(TsumI),' s']);
 disp(['    Ti = ',num2str(Icont.Ti),' s']);
-Icont.kp = 0.5* param.LCL.r1 * (Icont.Ti - halfTs)/(TsumI + halfTs);
 disp(['    kp = ',num2str(Icont.kp),' pu/pu']);
 disp('    Current feedback from LV side of trafo!');
-
-%% Temporary comments by Mota 2021-09-09
-% There was something odd for me in Eq.(17), so I redid this part
-% I decided to use Eq.(20) instead of (17)
-% Furthermore, Suul does not explain how to calculat Tc in (20), so I
-% calculated it myself.
-
-%Idc = param.Sn / param.Udc;              
-%Zdc = param.Udc / Idc;
-%Wb = 2*pi*param.Fn;
-%Cdcb = 1/(Wb*Zdc);
-
-% Equation (18)
-%a = 2*param.dampDC + 1;
-
-% Equations (17)
-%Ucont.Ti = a^2 * TsumU;
-%Ucont.kp = 1/(a*(param.Cdc/Cdcb)*TsumU);
-%disp('DC voltage controller PI transfer function = kpdc (1 + 1/(s Tidc))');
-%disp(['    Sum of small time constants TsumU = ',num2str(TsumU),' s']);
-%disp(['    Ti = ',num2str(Ucont.Ti),' s']);
-%disp(['    kp = ',num2str(Ucont.kp),' pu/pu']);
 
 % Calculation of Tc in (20)
 % Vdc[V] = 1/(Cdc[F]) * integral(Idc[A] dt)
