@@ -37,7 +37,8 @@ Follow these steps:
 5. Open the Simulink Library Browser by typing `slLibraryBrowser` in the MATLAB Command Window
 6. Once the Simulink Library Browser opens, [refresh the Simulink Library](https://se.mathworks.com/help/simulink/slref/librarybrowser.librarybrowser2.refresh.html). The NTNU Power Systems library should now be visible. :-)
 7. Generate mex files of the C/C++ based blocks:
-```mex enabled*.c
+```
+mex enabled*.c
 mex notch*.c
 mex pi_std_antiwindup*.c
 mex variable_delay_floor_ceil*.c
