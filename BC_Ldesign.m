@@ -1,4 +1,4 @@
-%% GC_LCLdesign.m
+%% BC_Ldesign.m
 % Authors: Erick Fernando Alves, Daniel dos Santos Mota
 % Date: 2021-10-29
 %
@@ -6,7 +6,7 @@
 %
 % Naming convention:
 %   BC_    : battery converter, i.e., the converter connected to energy storage device
-%   L      : inductor - capacitor - inductor
+%   L      : inductor (and parasitic series resistance)
 %   design : self explanatory
 
 
