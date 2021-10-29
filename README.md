@@ -8,36 +8,41 @@ This library is far from complete and is not yet thoroughly documented, tested n
 # Getting Started
 
 ## Matlab requirements
-pwrsys-matlab Simulink Library is saved in MATLAB version R2018a, so any newer MATLAB release should be compatible with this library.
+pwrsys-matlab Simulink Library is saved in MATLAB version 9.0.0.960322 (R2016a) Update 7, so any newer MATLAB release should be compatible with this library.
 
 |**Required Software**|**Version**|
 |---|---|
-|MATLAB|Version 9.4 (R2018a)|
-|Simulink|Version 9.1 (R2018a)|
-|Simscape|Version 4.4 (R2018a)|
-|Simscape Power Systems|Version 6.9 (R2018a)|
-|Control System Toolbox|Version 10.4 (R2018a)|
+|MATLAB|Version 9.0 (R2016a)|
+|Simulink|Version 8.7 (R2016a)|
+|Simscape|Version 4.0 (R2016a)|
+|Simscape Power Systems|Version 6.5 (R2016a)|
+|Control System Toolbox|Version 10.0 (R2016a)|
  
 Ensure that the correct version of MATLAB and the required toolboxes are installed by typing `ver` in the MATLAB Command Window.
 
-There is a branch open to reach compatibility with MATLAB version R2016a. The main challenge has been implementing a substitute to the "Discrete Varying Notch" block from the Control System Toolbox. Fell free to download this branch if you do not intend to use any block that depends on it (e.g. frequency-adaptive current controllers).
+Some blocks of the library are implemented in C/C++ to allow execution in real-time systems and to avoid algebraic loops. Therefore, a C/C++ compiler shall be installed. In Windows, install the [MinGW-w64 Compiler](https://se.mathworks.com/help/matlab/matlab_external/install-mingw-support-package.html). In Linux, install [gcc](https://se.mathworks.com/matlabcentral/answers/377997-how-do-i-install-gcc-compiler-on-linux).  
 
 
-## Installing the library
+## Installing and testing the library
 
 Follow these steps:
 1. Clone the repository from GitHub: (https://github.com/efantnu/pwrsys-matlab)
 2. Open your MATLAB startup file typing 'open startup.m' in MATLAB Command Window.
 3. Add the following lines to the end of this file:
 ```matlab
-    pwrsysPath = '<pwrsys-matlab path>';
+    pwrsysPath = '<pwrsys-matlab path in your machine>';
     addpath(genpath(pwrsysPath));
 ```
 4. Restart your MATLAB
 5. Open the Simulink Library Browser by typing `slLibraryBrowser` in the MATLAB Command Window
-6. Once the Simulink Library Browser opens, [refresh the Simulink Library](https://se.mathworks.com/help/simulink/slref/librarybrowser.librarybrowser2.refresh.html).
-
-The NTNU Power Systems library should now be visible. :-)
+6. Once the Simulink Library Browser opens, [refresh the Simulink Library](https://se.mathworks.com/help/simulink/slref/librarybrowser.librarybrowser2.refresh.html). The NTNU Power Systems library should now be visible. :-)
+7. Generate mex files of the C/C++ based blocks:
+```mex enabled*.c
+mex notch*.c
+mex pi_std_antiwindup*.c
+mex variable_delay_floor_ceil*.c
+``` 
+8. Open 'examples/oog_example.slx' and run the simulation. If it runs without erros, then the library is properly installed and working.   
 
 
 ## Library organization
