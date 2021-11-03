@@ -48,7 +48,7 @@ di = param.deltaimax * Ibase;
 output.L = param.Udc / ( di * 2 * param.Fsw);
 output.R = (1 - param.eta) * Rbase; 
 
-disp('Inductanced - battery side');
+disp('Inductance - battery side');
 disp(['    L = ',num2str(output.L),' H']);
 disp(['    R = ',num2str(output.R),' Ohm']);
 
